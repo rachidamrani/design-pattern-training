@@ -1,14 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-using design_patterns.StrategyPattern;
+﻿using design_patterns.observerPattern;
 
-var basicCameraApp = new BasicCameraApp();
-basicCameraApp.setSharingBehavior(new Text());
-basicCameraApp.Share();
+var observable = new Observable();
 
-System.Console.WriteLine("===========");
+var observer1 = new ObserverImpl1();
+var observer2 = new ObserverImpl2();
 
-var cameraPlusApp = new CameraPlusApp();
-cameraPlusApp.setSharingBehavior(new Social());
+observable.subscribe(observer1);
+observable.subscribe(observer2);
+
+observable.setState(4);
+observable.setState(10);
 
 
-cameraPlusApp.Share();
+observable.unsubscribe(observer1);
+
+System.Console.WriteLine("Observer 1 is no longer interested in receiving notifications");
+
+observable.setState(3);
+
